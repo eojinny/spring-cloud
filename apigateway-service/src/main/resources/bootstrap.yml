@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888
+      name: ecommerce # 파일명이라고 생각하면 된다. abc.yml이라고 생성했었다면 abc 로 작성

@@ -1,0 +1,61 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: user-service
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  datasource:
+    hikari:
+      url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+      driver-class-name: org.h2.Driver
+      connectionTimeout: 30000
+      maximumPoolSize: 10
+      maxLifetime: 1800000
+      poolName: HikariCP
+      readOnly: false
+      connectionTestQuery: SELECT 1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 1234
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+logging:
+  level:
+    com.example.userservice: DEBUG
+
+#token:
+#  expiration-time: 86400000 # 하루짜리 토큰 생성
+#  secret: changhwan2022changhwanchanghwan2022changhwanchanghwan2022changhwanchanghwan2022changhwanchanghwan2022changhwan
+
+greeting:
+  message: Welcome to the Simple E-commerce.
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
